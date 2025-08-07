@@ -32,7 +32,7 @@ This crate is ~30 lines of code. Audit with the following one-liner, but make su
 
 ```sh
 curl -H "User-Agent: $USER at $HOST" \
-     -L https://crates.io/api/v1/crates/snapshot-testing/0.1.0/download |
+     -L https://crates.io/api/v1/crates/snapshot-testing/0.1.1/download |
          tar --extract --gzip --to-stdout | less
 ```
 
