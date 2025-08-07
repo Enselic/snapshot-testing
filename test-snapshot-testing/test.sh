@@ -1,22 +1,44 @@
 #!/usr/bin/env bash
 set -o errexit -o nounset -o xtrace
 
+if [ ! -f LICENSE ]; then
+  echo "Run this script from the root of the snapshot-testing repository" >&2
+  exit 1
+fi
+
 cargo fmt -- --check
 
 RUSTDOCFLAGS='--deny warnings' cargo doc --locked --no-deps --document-private-items
 
 cargo clippy
 
-rm -f snapshot.txt
+assert_failure() {
+  if "$@"; then
+    echo "Expected failure, but command succeeded: $*" >&2
+    exit 1
+  fi
+}
 
-cargo run foo snapshot.txt && ( echo "ERROR: Unexpected success" && exit 1 )
+assert_success() {
+  if ! "$@"; then
+    echo "Expected success, but command failed: $*" >&2
+    exit 1
+  fi
+}
 
-UPDATE_SNAPSHOTS=1 cargo run foo snapshot.txt || ( echo "ERROR: Expected failure" && exit 1 )
 
-cargo run foo snapshot.txt || ( echo "ERROR: Expected failure" && exit 1 )
+SNAPSHOT_FILE=/tmp/snapshot-testing.txt
+CARGO_RUN="cargo run"
+rm -f $SNAPSHOT_FILE
 
-cargo run bar snapshot.txt && ( echo "ERROR: Unexpected success" && exit 1 )
+assert_failure                    $CARGO_RUN banana $SNAPSHOT_FILE
 
-UPDATE_SNAPSHOTS=1 cargo run bar snapshot.txt && ( echo "ERROR: Unexpected success" && exit 1 )
+assert_success UPDATE_SNAPSHOTS=1 $CARGO_RUN banana $SNAPSHOT_FILE
 
-cargo run bar snapshot.txt || ( echo "ERROR: Expected failure" && exit 1 )
+assert_success                    $CARGO_RUN banana $SNAPSHOT_FILE
+
+assert_failure                    $CARGO_RUN apple $SNAPSHOT_FILE
+
+assert_failure UPDATE_SNAPSHOTS=1 $CARGO_RUN apple $SNAPSHOT_FILE
+
+assert_success                    $CARGO_RUN apple $SNAPSHOT_FILE
