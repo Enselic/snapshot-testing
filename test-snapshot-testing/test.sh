@@ -6,12 +6,12 @@ if [ ! -f LICENSE ]; then
   exit 1
 fi
 
+# First do some linting
 cargo fmt -- --check
-
 RUSTDOCFLAGS='--deny warnings' cargo doc --locked --no-deps --document-private-items
-
 cargo clippy
 
+# Then run the tests
 assert_failure() {
   if "$@"; then
     echo "Expected failure, but command succeeded: $*" >&2
@@ -26,19 +26,18 @@ assert_success() {
   fi
 }
 
-
 SNAPSHOT_FILE=/tmp/snapshot-testing.txt
-CARGO_RUN="cargo run"
+CARGO_RUN="cargo run --manifest-path test-snapshot-testing/Cargo.toml -- "
 rm -f $SNAPSHOT_FILE
 
-assert_failure                    $CARGO_RUN banana $SNAPSHOT_FILE
+assert_failure                        $CARGO_RUN banana $SNAPSHOT_FILE
 
-assert_success UPDATE_SNAPSHOTS=1 $CARGO_RUN banana $SNAPSHOT_FILE
+assert_success env UPDATE_SNAPSHOTS=1 $CARGO_RUN banana $SNAPSHOT_FILE
 
-assert_success                    $CARGO_RUN banana $SNAPSHOT_FILE
+assert_success                        $CARGO_RUN banana $SNAPSHOT_FILE
 
-assert_failure                    $CARGO_RUN apple $SNAPSHOT_FILE
+assert_failure                        $CARGO_RUN apple  $SNAPSHOT_FILE
 
-assert_failure UPDATE_SNAPSHOTS=1 $CARGO_RUN apple $SNAPSHOT_FILE
+assert_success env UPDATE_SNAPSHOTS=1 $CARGO_RUN apple  $SNAPSHOT_FILE
 
-assert_success                    $CARGO_RUN apple $SNAPSHOT_FILE
+assert_success                        $CARGO_RUN apple  $SNAPSHOT_FILE
