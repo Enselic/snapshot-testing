@@ -11,10 +11,10 @@ pub fn assert_eq_or_update(value: impl AsRef<str>, snapshot_path: impl AsRef<std
 
     if update_snapshots() {
         std::fs::write(snapshot_path, value)
-            .unwrap_or_else(|e| panic!("Error writing `{snapshot_path:?}`: {e}"));
+            .unwrap_or_else(|e| panic!("Error writing {snapshot_path:?}: {e}"));
     } else {
         let snapshot = std::fs::read_to_string(snapshot_path)
-            .unwrap_or_else(|e| panic!("Error reading `{snapshot_path:?}`: {e}"));
+            .unwrap_or_else(|e| panic!("Error reading {snapshot_path:?}: {e}"));
 
         similar_asserts::assert_eq!(value, snapshot);
     }
