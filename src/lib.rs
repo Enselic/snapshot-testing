@@ -1,5 +1,6 @@
 /// Assert that `value` matches the snapshot at `snapshot_path`. If there is a
-/// diff the function will panic with a colorful diff that shows what changed.
+/// mismatch the function will panic with a helpful diff that shows what
+/// changed.
 ///
 /// If the env var `UPDATE_SNAPSHOTS` is set to `1`, `yes` or `true` then
 /// `value` will be written to `snapshot_file` instead of being asserted to
