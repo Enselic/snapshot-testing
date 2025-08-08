@@ -1,3 +1,5 @@
+TODO: colors in CI and document in readme
+
 ### Usage Example
 
 ```rs
@@ -24,9 +26,13 @@ cargo test
 
 We use the same excellent [diffing engine](https://github.com/mitsuhiko/similar) that [`insta`](https://github.com/mitsuhiko/insta) is using. While `insta` unfortunately suffers from [Issue \#425: GitHub syntax highlights insta snapshots like Jest Snapshots](https://github.com/mitsuhiko/insta/issues/425) which makes diffs [very hard to read](https://github.com/cargo-public-api/cargo-public-api/pull/818), we allow custom snapshot file extensions and avoid that bug.
 
+#### Force Colors in CI
+
+Set the env var `CLICOLOR_FORCE=1` to get [colors](https://github.com/console-rs/console/blob/a51fcead7cda/src/utils.rs#L18) in CI logs.
+
 ### Audit the Code
 
-This crate is ~30 lines of code. Audit with the following one-liner, but make sure you follow to the [crates.io Data Access Policy](https://crates.io/data-access):
+This crate is 40 lines of code. Audit with the following one-liner, but make sure you follow to the [crates.io Data Access Policy](https://crates.io/data-access):
 
 ```sh
 curl -H "User-Agent: $USER at $HOST" \
