@@ -11,6 +11,9 @@ on:
 
 env:
   CARGO_TERM_COLOR: always
+  # The `similar` crate uses `console` which uses `CLICOLOR_FORCE` to force colors for CI logs:
+  # https://github.com/console-rs/console/blob/a51fcead7cda1fc6f5ac552a5588aaba8c069639/src/utils.rs#L18
+  CLICOLOR_FORCE: 1
 
 jobs:
   all-jobs:
