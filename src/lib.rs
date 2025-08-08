@@ -9,7 +9,9 @@ pub fn assert_eq_or_update(value: impl AsRef<str>, snapshot_path: impl AsRef<std
     let value = value.as_ref();
     let snapshot_path = snapshot_path.as_ref();
 
-    if update_snapshots() {
+    if update_snapshot() {
+        ensure_parent_dir_exists(snapshot_path);
+
         std::fs::write(snapshot_path, value)
             .unwrap_or_else(|e| panic!("Error writing {snapshot_path:?}: {e}"));
     } else {
@@ -20,7 +22,14 @@ pub fn assert_eq_or_update(value: impl AsRef<str>, snapshot_path: impl AsRef<std
     }
 }
 
-fn update_snapshots() -> bool {
+fn ensure_parent_dir_exists(snapshot_path: &std::path::Path) {
+    if !snapshot_path.exists() {
+        std::fs::create_dir_all(snapshot_path.parent().unwrap())
+            .unwrap_or_else(|e| panic!("Error creating directory for {snapshot_path:?}: {e}"));
+    }
+}
+
+fn update_snapshot() -> bool {
     std::env::var("UPDATE_SNAPSHOTS")
         .map(|s| s.to_lowercase())
         .is_ok_and(|s| s == "1" || s == "yes" || s == "true")
