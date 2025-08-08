@@ -24,7 +24,7 @@ cargo test
 
 ### Diffing Engine
 
-We use the same excellent [diffing engine](https://github.com/mitsuhiko/similar) that [insta](https://github.com/mitsuhiko/insta) is using. But since we allow custom snapshot file extensions we do not suffer from [Consider ways to avoid conflicts with Jest snapshots for external tools (like GitHub Linguist)](https://github.com/mitsuhiko/insta/issues/425) which makes diffs very [hard to read](https://github.com/cargo-public-api/cargo-public-api/pull/818).
+We use the same excellent [diffing engine](https://github.com/mitsuhiko/similar) that [`insta`](https://github.com/mitsuhiko/insta) is using. While `insta` unfortunately suffers from [Issue \#425: GitHub syntax highlights insta snapshots like Jest Snapshots](https://github.com/mitsuhiko/insta/issues/425) which makes diffs [very hard to read](https://github.com/cargo-public-api/cargo-public-api/pull/818), we allow custom snapshot file extensions and avoid that bug.
 
 ### Audit the Code
 
