@@ -1,24 +1,22 @@
-### Usage
-
-Write a test:
+### Usage Example
 
 ```rs
+/// Regression test for `impl Display` of a complex type.
 #[test]
-fn check_snapshot() {
-    let value = "... contents to regression test ...";
-    snapshot_testing::assert_eq_or_update(value, "snapshot.txt");
+fn test_display_of_some_type() {
+    let value = ... // produce a value somehow
+
+    snapshot_testing::assert_eq_or_update(
+        value.to_string(),
+        "./tests/snapshots/display-impl.txt",
+    );
 }
 ```
-
-Update the snapshot file before the first test:
-
 ```sh
+# Create (or update) the snapshot file
 UPDATE_SNAPSHOTS=yes cargo test
-```
 
-Assert that current contents matches the contents of the snapshot file:
-
-```sh
+# Ensure the Display impl is not accidentally changed
 cargo test
 ```
 
@@ -32,7 +30,7 @@ This crate is ~30 lines of code. Audit with the following one-liner, but make su
 
 ```sh
 curl -H "User-Agent: $USER at $HOST" \
-     -L https://crates.io/api/v1/crates/snapshot-testing/0.1.1/download |
+     -L https://crates.io/api/v1/crates/snapshot-testing/0.1.2/download |
          tar --extract --gzip --to-stdout | less
 ```
 

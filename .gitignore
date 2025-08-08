@@ -1,2 +1,5 @@
 /target
 /test-snapshot-testing/target
+
+# Must be under full control of our tests
+/tests/snapshots/display-impl.txt

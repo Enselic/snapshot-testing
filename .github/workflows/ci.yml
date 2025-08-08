@@ -29,4 +29,4 @@ jobs:
       contents: read # For actions/checkout@v4
     steps:
       - uses: actions/checkout@v4
-      - run: ./test-snapshot-testing/test.sh
+      - run: ./tests/test.sh
