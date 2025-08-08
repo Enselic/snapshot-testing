@@ -15,3 +15,8 @@ exclude = ["/.github", "/.gitignore", "/tests"] # Simplify auditing
 [dependencies.similar-asserts]
 version = "1.7.0"
 default-features = false
+
+# Already a dependency of similar-asserts that we also make use of.
+[dependencies.console]
+version = "0.15.10"
+default-features = false

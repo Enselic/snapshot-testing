@@ -22,7 +22,12 @@ pub fn assert_eq_or_update(value: impl AsRef<str>, snapshot_path: impl AsRef<std
         let snapshot = std::fs::read_to_string(snapshot_path)
             .unwrap_or_else(|e| panic!("Error reading {snapshot_path:?}: {e}"));
 
-        similar_asserts::assert_eq!(value, snapshot);
+        similar_asserts::assert_eq!(
+            value,
+            snapshot,
+            "\n\n{}: Run with env var `UPDATE_SNAPSHOTS=yes` to update snapshots\n",
+            console::style("help").cyan()
+        );
     }
 }
 
