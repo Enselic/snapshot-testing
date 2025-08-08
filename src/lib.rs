@@ -9,6 +9,7 @@
 /// Set the env var `CLICOLOR_FORCE` to `1` to force colors in diffs in e.g. CI
 /// logs. See <https://github.com/console-rs/console/blob/a51fcead7cda/src/utils.rs#L18>
 /// which is what our dependency `similar-asserts` uses.
+#[track_caller]
 pub fn assert_eq_or_update(value: impl AsRef<str>, snapshot_path: impl AsRef<std::path::Path>) {
     let value = value.as_ref();
     let snapshot_path = snapshot_path.as_ref();
