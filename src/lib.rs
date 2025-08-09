@@ -6,27 +6,26 @@
 /// `value` will be written to `snapshot_file` instead of being asserted to
 /// match.
 ///
-/// Set the env var `CLICOLOR_FORCE` to `1` to force colors in diffs in e.g. CI
-/// logs. See <https://github.com/console-rs/console/blob/a51fcead7cda/src/utils.rs#L18>
-/// which is what our dependency `similar-asserts` uses.
+/// Set the env var `CLICOLOR_FORCE` to `1` to [force
+/// colors](https://github.com/console-rs/console/blob/a51fcead7cda/src/utils.rs#L18)
+/// in diffs in e.g. CI logs.
 #[track_caller]
 pub fn assert_eq_or_update(value: impl AsRef<str>, snapshot_path: impl AsRef<std::path::Path>) {
-    let value = value.as_ref();
     let snapshot_path = snapshot_path.as_ref();
 
     if update_snapshot() {
         ensure_parent_dir_exists(snapshot_path);
 
-        std::fs::write(snapshot_path, value)
+        std::fs::write(snapshot_path, value.as_ref())
             .unwrap_or_else(|e| panic!("Error writing {snapshot_path:?}: {e}"));
     } else {
         let snapshot = std::fs::read_to_string(snapshot_path)
             .unwrap_or_else(|e| panic!("Error reading {snapshot_path:?}: {e}"));
 
         similar_asserts::assert_eq!(
-            value,
+            value.as_ref(),
             snapshot,
-            "\n\n{}: Run with env var `UPDATE_SNAPSHOTS=yes` to update snapshots\n",
+            "\n\n{}: run with env var `UPDATE_SNAPSHOTS=yes` to update snapshots\n",
             console::style("help").cyan()
         );
     }
