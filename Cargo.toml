@@ -1,5 +1,5 @@
 [package]
-edition = "2024"
+edition = "2021"
 name = "snapshot-testing"
 version = "0.1.4" # Keep in sync with README.md audit command
 description = "Assert that a multi-line string equals the contents of an easily updatable snapshot file. Print a nice colored diff if not."

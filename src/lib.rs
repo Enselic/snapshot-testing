@@ -39,10 +39,8 @@ pub fn assert_eq_or_update(value: impl AsRef<str>, snapshot_path: impl AsRef<std
 fn maybe_enable_colors() {
     // Only care about `CARGO_TERM_COLOR=always`. Otherwise the `console`
     // defaults are fine.
-    if let Ok(color) = std::env::var("CARGO_TERM_COLOR")
-        && color == "always"
-    {
-        console::set_colors_enabled(true);
+    if let Ok(color) = std::env::var("CARGO_TERM_COLOR") {
+        console::set_colors_enabled(color == "always");
     }
 }
 
