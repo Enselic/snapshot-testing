@@ -40,7 +40,9 @@ fn maybe_enable_colors() {
     // Only care about `CARGO_TERM_COLOR=always`. Otherwise the `console`
     // defaults are fine.
     if let Ok(color) = std::env::var("CARGO_TERM_COLOR") {
-        console::set_colors_enabled(color == "always");
+        if color == "always" {
+            console::set_colors_enabled(true);
+        }
     }
 }
 
