@@ -30,7 +30,7 @@ This crate is small and easily audited with the following one-liner, but make su
 
 ```sh
 curl -H "User-Agent: $USER at $HOST" \
-     -L https://crates.io/api/v1/crates/snapshot-testing/0.1.5/download |
+     -L https://crates.io/api/v1/crates/snapshot-testing/0.1.6/download |
          tar --extract --gzip --to-stdout | less
 ```
 
