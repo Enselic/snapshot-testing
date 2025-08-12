@@ -26,7 +26,7 @@ We use the excellent [`insta`](https://github.com/mitsuhiko/insta) [diffing engi
 
 ### Audit the Code
 
-This crate is very small and easily audited[^1] with the following command:
+This crate is very small and easily audited with the following command [^1]:
 
 ```sh
 curl -H "User-Agent: $USER at $HOST" \
@@ -35,4 +35,4 @@ tar --extract --gzip --to-stdout |
 less
 ```
 
-[^1]: Please refer to [crates.io Data Access Policy](https://crates.io/data-access).
+[^1]: Please also see [crates.io Data Access Policy](https://crates.io/data-access).
