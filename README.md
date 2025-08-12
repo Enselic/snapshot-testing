@@ -22,15 +22,17 @@ cargo test
 
 ### Diffing Engine
 
-We use the same excellent [diffing engine](https://github.com/mitsuhiko/similar) that [`insta`](https://github.com/mitsuhiko/insta) is using. While `insta` unfortunately suffers from [Issue \#425: GitHub syntax highlights insta snapshots like Jest Snapshots](https://github.com/mitsuhiko/insta/issues/425) which makes diffs [very hard to read](https://github.com/cargo-public-api/cargo-public-api/pull/818), we allow custom snapshot file extensions and avoid that bug.
+We use the excellent [`insta`](https://github.com/mitsuhiko/insta) [diffing engine](https://github.com/mitsuhiko/similar) without suffering from [Issue \#425: GitHub syntax highlights insta snapshots like Jest Snapshots](https://github.com/mitsuhiko/insta/issues/425) which unfortunately makes diffs [very hard to read](https://github.com/cargo-public-api/cargo-public-api/pull/818).
 
 ### Audit the Code
 
-This crate is small and easily audited with the following one-liner, but make sure you follow to the [crates.io Data Access Policy](https://crates.io/data-access):
+This crate is very small and easily audited[^1] with the following command:
 
 ```sh
 curl -H "User-Agent: $USER at $HOST" \
      -L https://crates.io/api/v1/crates/snapshot-testing/0.1.6/download |
-         tar --extract --gzip --to-stdout | less
+tar --extract --gzip --to-stdout |
+less
 ```
 
+[^1]: Please refer to [crates.io Data Access Policy](https://crates.io/data-access).
