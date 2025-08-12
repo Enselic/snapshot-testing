@@ -48,3 +48,6 @@ assert_success env SNAPSHOT_VALUE=apple  UPDATE_SNAPSHOTS=1 $CARGO_TEST
 
 # Assert that we pass with an updated snapshot
 assert_success env SNAPSHOT_VALUE=apple                     $CARGO_TEST
+
+# Since cargo test fails above, be clear when the suite passess
+echo "all ok"
