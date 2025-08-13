@@ -34,7 +34,7 @@ This crate is very small and easily audited with the following command [^1]:
 
 ```sh
 curl -H "User-Agent: $USER at $HOST" \
-     -L https://crates.io/api/v1/crates/snapshot-testing/0.1.6/download |
+     -L https://crates.io/api/v1/crates/snapshot-testing/0.1.7/download |
 tar --extract --gzip --to-stdout |
 less
 ```

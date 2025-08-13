@@ -1,7 +1,7 @@
 [package]
 edition = "2021"
 name = "snapshot-testing"
-version = "0.1.6" # Keep in sync with README.md audit command
+version = "0.1.7" # Keep in sync with README.md audit command
 description = "Assert that strings equal easily updatable snapshot files. Show nice colored diffs if not."
 homepage = "https://github.com/Enselic/snapshot-testing"
 documentation = "https://docs.rs/snapshot-testing"
