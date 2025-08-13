@@ -2,7 +2,7 @@
 edition = "2021"
 name = "snapshot-testing"
 version = "0.1.6" # Keep in sync with README.md audit command
-description = "Assert that a multi-line string equals the contents of an easily updatable snapshot file. Print a nice colored diff if not."
+description = "Test that strings equal easily updatable snapshot files. Show nice colored diffs if not."
 homepage = "https://github.com/Enselic/snapshot-testing"
 documentation = "https://docs.rs/snapshot-testing"
 readme = "README.md"
@@ -13,7 +13,7 @@ exclude = ["/.github", "/.gitignore", "/tests"] # Simplify auditing
 
 # We use the same nice underlying colored diff engine that insta is using.
 [dependencies.similar-asserts]
-version = "1.7.0" # TODO: Require https://github.com/mitsuhiko/similar-asserts/pull/15
+version = "1.7.0"
 default-features = false
 
 # Already a dependency of similar-asserts that we also make use of.

@@ -1,3 +1,7 @@
+## snapshot-testing
+
+Test that strings equal easily updatable snapshot files. Show nice colored diffs if not.
+
 ### Usage Example
 
 ```rs
