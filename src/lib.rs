@@ -1,3 +1,5 @@
+#![doc = include_str!("../README.md")]
+
 /// Assert that `value` equals the snapshot at `snapshot_path`. If there is a
 /// mismatch the function will panic with a helpful diff that shows what
 /// changed.
